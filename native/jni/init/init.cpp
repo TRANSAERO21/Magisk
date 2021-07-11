@@ -142,24 +142,24 @@ int main(int argc, char *argv[]) {
     BaseInit *init;
     cmdline cmd{};
 
-    if (argc > 1 && argv[1] == "selinux_setup"sv) {
+    /* if (argc > 1 && argv[1] == "selinux_setup"sv) {
         setup_klog();
         init = new SecondStageInit(argv);
-    } else {
+    } else { */
         // This will also mount /sys and /proc
         load_kernel_info(&cmd);
 
-        if (cmd.skip_initramfs)
+        /* if (cmd.skip_initramfs)
             init = new SARInit(argv, &cmd);
         else if (cmd.force_normal_boot)
             init = new FirstStageInit(argv, &cmd);
-        else if (access("/sbin/recovery", F_OK) == 0 || access("/system/bin/recovery", F_OK) == 0)
+        else */ if (access("/sbin/recovery", F_OK) == 0 || access("/system/bin/recovery", F_OK) == 0)
             init = new RecoveryInit(argv, &cmd);
-        else if (check_two_stage())
-            init = new FirstStageInit(argv, &cmd);
+        /* else if (check_two_stage())
+            init = new FirstStageInit(argv, &cmd); */
         else
             init = new RootFSInit(argv, &cmd);
-    }
+    /* } */
 
     // Run the main routine
     init->start();
