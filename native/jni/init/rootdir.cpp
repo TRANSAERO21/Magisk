@@ -337,10 +337,10 @@ void RootFSInit::patch_rootfs() {
         xsymlink(rules_dir.data(), TMP_RULESDIR);
     }
 
-    if (patch_sepolicy("/sepolicy")) {
+    /* if ( */ patch_sepolicy("/sepolicy"); /* ) { */
         auto init = mmap_data::rw("/init");
         init.patch({ make_pair(SPLIT_PLAT_CIL, "xxx") });
-    }
+    /* } */
 
     // Handle overlays
     if (access("/overlay.d", F_OK) == 0) {
