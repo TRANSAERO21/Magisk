@@ -186,14 +186,15 @@ sepolicy *sepolicy::compile_split() {
 }
 
 sepolicy *sepolicy::from_split() {
-    const char *odm_pre = ODM_POLICY_DIR "precompiled_sepolicy";
+    /* // Force to load vendor sepolicy
+    const char *odm_pre = ODM_POLICY_DIR "precompiled_sepolicy"; */
     const char *vend_pre = VEND_POLICY_DIR "precompiled_sepolicy";
-    if (access(odm_pre, R_OK) == 0 && check_precompiled(odm_pre))
+    /*if (access(odm_pre, R_OK) == 0 && check_precompiled(odm_pre))
         return sepolicy::from_file(odm_pre);
-    else if (access(vend_pre, R_OK) == 0 && check_precompiled(vend_pre))
+    else if (access(vend_pre, R_OK) == 0 && check_precompiled(vend_pre)) */
         return sepolicy::from_file(vend_pre);
-    else
-        return sepolicy::compile_split();
+    /* else
+        return sepolicy::compile_split(); */
 }
 
 sepolicy::~sepolicy() {
